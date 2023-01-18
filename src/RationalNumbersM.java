@@ -1,9 +1,12 @@
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 public class RationalNumbersM extends CalcModel<RationalNumbersM> {
     private int wholeFractionPart;
     private int numerator;
     private int denominator;
 
-    public RationalNumbersM() {}
+    private RationalNumbersM() {}
 
     private RationalNumbersM(int numerator, int denominator) {
         this.wholeFractionPart = 0;
@@ -11,7 +14,8 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         this.denominator = denominator;
     }
 
-    public static RationalNumbersM createRationalNumbersM() {
+    @Contract(" -> new")
+    public static @NotNull RationalNumbersM createRationalNumbersM() {
         return new RationalNumbersM();
     }
 
@@ -21,16 +25,17 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         this.denominator = denominator;
     }
 
-    public static RationalNumbersM createRationalNumbersM(int wholeFractionPart, int numerator, int denominator)
-            throws RationalNumbersExeption {
-        if (numerator < 1 || denominator < 2) throw new RationalNumbersExeption("invalid data");
+    @Contract("_, _, _ -> new")
+    public static @NotNull RationalNumbersM createRationalNumbersM(int wholeFractionPart, int numerator, int denominator)
+            throws RationalNumbersException {
+        if (numerator < 1 || denominator < 2) throw new RationalNumbersException("invalid data");
         else return new RationalNumbersM(wholeFractionPart, numerator, denominator);
     }
 
-    public RationalNumbersM result(String op, RationalNumbersM x, RationalNumbersM y)
-            throws RationalNumbersExeption {
+    private RationalNumbersM resultN(String op, RationalNumbersM x, RationalNumbersM y)
+            throws RationalNumbersException {
         if (!op.equals("+") & !op.equals("-") & !op.equals("*") & !op.equals("/"))
-            throw new RationalNumbersExeption("invalid operation");
+            throw new RationalNumbersException("invalid operation");
         else {
             switch (op) {
                 case "+":
@@ -47,7 +52,7 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         }
     }
 
-    public RationalNumbersM add(RationalNumbersM x, RationalNumbersM y) {
+    private RationalNumbersM add(RationalNumbersM x, RationalNumbersM y) {
         RationalNumbersM result = new RationalNumbersM(1, 1, 1);
         int greatestCommonDivisor = GCD (x.denominator, y.denominator);
         result.wholeFractionPart = x.wholeFractionPart + y.wholeFractionPart;
@@ -62,7 +67,7 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         return fractionReduction(result);
     }
 
-    public RationalNumbersM sub(RationalNumbersM x, RationalNumbersM y) {
+    private RationalNumbersM sub(RationalNumbersM x, RationalNumbersM y) {
         RationalNumbersM result = new RationalNumbersM(1, 1, 1);
         int greatestCommonDivisor = GCD (x.denominator, y.denominator);
         result.wholeFractionPart = x.wholeFractionPart - y.wholeFractionPart;
@@ -70,39 +75,33 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
                 x.numerator * (greatestCommonDivisor / x.denominator) -
                         y.numerator * (greatestCommonDivisor / y.denominator);
         result.denominator = greatestCommonDivisor;
-        if (result.numerator < 0) {
+        if (result.numerator < 0 & result.wholeFractionPart < 0) {
             result.wholeFractionPart -= 1;
             result.numerator += result.denominator;
         }
         return fractionReduction(result);
     }
 
-    public RationalNumbersM mul(RationalNumbersM x, RationalNumbersM y) {
+    private RationalNumbersM mul(RationalNumbersM x, RationalNumbersM y) {
         RationalNumbersM result = new RationalNumbersM(0, 1, 1);
         x = rationalToFraction(x);
         y = rationalToFraction(y);
         result.numerator = x.numerator * y.numerator;
         result.denominator = x.denominator * y.denominator;
-        return fractionToRational(result);
+        return fractionReduction(result);
     }
 
-    public RationalNumbersM div(RationalNumbersM x, RationalNumbersM y) {
-        RationalNumbersM result = new RationalNumbersM(1, 1, 1);
+    private RationalNumbersM div(RationalNumbersM x, RationalNumbersM y) {
+        RationalNumbersM result = new RationalNumbersM(0, 1, 1);
         x = rationalToFraction(x);
         y = rationalToFraction(y);
         result.numerator = x.numerator * y.denominator;
         result.denominator = x.denominator * y.numerator;
-        return fractionToRational(fractionReduction(result));
+        return fractionReduction(result);
     }
 
     private RationalNumbersM rationalToFraction(RationalNumbersM x) {
         return new RationalNumbersM((x.wholeFractionPart * x.denominator + x.numerator), x.denominator);
-    }
-
-    private RationalNumbersM fractionToRational(RationalNumbersM x) {
-        return new RationalNumbersM(
-                x.numerator / x.denominator,
-                (x.numerator % x.denominator), x.denominator);
     }
 
     private RationalNumbersM fractionReduction(RationalNumbersM x) {
@@ -111,9 +110,12 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         x.wholeFractionPart += x.numerator / x.denominator;
         x.numerator = (x.numerator % x.denominator) / smallestCommonMultiplier;
         x.denominator /= smallestCommonMultiplier;
+        if (x.denominator < 0) {
+            x.denominator *= -1;
+            x.numerator *= -1;
+        }
         return x;
     }
-
 
     private int GCD(int a, int b){
         return (a * b) / SCM(a, b);
@@ -132,7 +134,9 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         return wholeFractionPart + "•" + numerator + "/" + denominator;
     }
 
-
-
+    @Override
+    public CalcModel result(String op, CalcModel x, CalcModel y) throws RationalNumbersException {
+        return resultN(op, (RationalNumbersM) x, (RationalNumbersM) y);
+    }
 }
 
