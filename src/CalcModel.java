@@ -1,4 +1,3 @@
-public abstract class CalcModel<T> implements Model {
-    T value1;
-    T value2;
+@SuppressWarnings({"rawtypes", "unchecked"})
+public abstract class CalcModel implements Model {
 }
