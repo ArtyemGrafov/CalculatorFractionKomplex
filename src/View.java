@@ -16,6 +16,11 @@ public class View {
     }
 
     public void print(String data, String title) {
+        show(data);
         System.out.printf("%s %s\n", title, data);
+    }
+
+    public String show(String data){
+        return data;
     }
 }

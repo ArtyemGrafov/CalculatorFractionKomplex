@@ -1,0 +1,9 @@
+Jan 19, 2023 10:02:49 PM Main main
+INFO: (1 + 2j) * (3 + 4j) = (-5 + 10j)
+
+Jan 19, 2023 10:03:21 PM Main main
+INFO: (5 + 6j) - (7 + 8j) = (-2 - 2j)
+
+Jan 19, 2023 10:03:38 PM Main main
+INFO: 1•4/6 / 2•7/89 = 89/111
+

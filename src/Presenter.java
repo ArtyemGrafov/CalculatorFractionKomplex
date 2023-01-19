@@ -2,6 +2,7 @@ public class Presenter<T extends CalcModel> {
 
     View view;
     Model model;
+    public static String res = "";
 
     public Presenter(T m, View v) {
         model = m;
@@ -21,7 +22,8 @@ public class Presenter<T extends CalcModel> {
         String operation = view.getOperation("operation: ");
 
         CalcModel result = model.result(operation, a, b);
-        view.print(a + " " + operation + " " + b + " = " + result, "Result: ");
+        res = a + " " + operation + " " + b + " = " + result;
+        view.print(res, "Result: ");
     }
 
     public void buttonClickRational() throws RationalNumbersException, ComplexNumbersException {
@@ -39,7 +41,8 @@ public class Presenter<T extends CalcModel> {
         String operation = view.getOperation("operation: ");
 
         CalcModel result = model.result(operation, a, b);
-        view.print(a + " " + operation + " " + b + " = " + result, "Result: ");
+        res = a + " " + operation + " " + b + " = " + result;
+        view.print(res, "Result: ");
     }
 
 }
