@@ -37,18 +37,13 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         if (!op.equals("+") & !op.equals("-") & !op.equals("*") & !op.equals("/"))
             throw new RationalNumbersException("invalid operation");
         else {
-            switch (op) {
-                case "+":
-                    return add(x, y);
-                case "-":
-                    return sub(x, y);
-                case "*":
-                    return mul(x, y);
-                case "/":
-                    return div(x, y);
-                default:
-                    return new RationalNumbersM(0, 0, 1);
-            }
+            return switch (op) {
+                case "+" -> add(x, y);
+                case "-" -> sub(x, y);
+                case "*" -> mul(x, y);
+                case "/" -> div(x, y);
+                default -> new RationalNumbersM(0, 0, 1);
+            };
         }
     }
 
@@ -117,10 +112,12 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
         return x;
     }
 
+   /** returns the greatest common divisor*/
     private int GCD(int a, int b){
         return (a * b) / SCM(a, b);
     }
 
+    /** returns the smallest common multiple*/
     private int SCM(int a, int b){
         if (b == 0) return a;
         return SCM(b, a % b);
@@ -135,6 +132,10 @@ public class RationalNumbersM extends CalcModel<RationalNumbersM> {
     }
 
     @Override
+    @SuppressWarnings({"rawtypes"})
+    /*
+      returns the result of the selected operation on rational numbers
+     */
     public CalcModel result(String op, CalcModel x, CalcModel y) throws RationalNumbersException {
         return resultN(op, (RationalNumbersM) x, (RationalNumbersM) y);
     }

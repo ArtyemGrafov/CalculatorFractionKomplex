@@ -1,3 +1,4 @@
+@SuppressWarnings({"rawtypes"})
 public class Presenter<T extends CalcModel> {
 
     View view;
@@ -39,7 +40,6 @@ public class Presenter<T extends CalcModel> {
                 view.getValue("denominatorY: ")
         );
         String operation = view.getOperation("operation: ");
-
         CalcModel result = model.result(operation, a, b);
         res = a + " " + operation + " " + b + " = " + result;
         view.print(res, "Result: ");
