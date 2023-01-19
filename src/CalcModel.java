@@ -1,3 +1,3 @@
-@SuppressWarnings({"rawtypes", "unchecked"})
-public abstract class CalcModel implements Model {
+@SuppressWarnings({"rawtypes"})
+public abstract class CalcModel<T> implements Model {
 }

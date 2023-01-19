@@ -19,22 +19,18 @@ public class ComplexNumbers extends CalcModel<ComplexNumbers> {
 
 
     @Override
+    @SuppressWarnings({"rawtypes"})
     public CalcModel result(String op, CalcModel x, CalcModel y) throws ComplexNumbersException {
         if (!op.equals("+") & !op.equals("-") & !op.equals("*") & !op.equals("/"))
             throw new ComplexNumbersException("invalid operation");
         else {
-            switch (op) {
-                case "+":
-                    return add((ComplexNumbers) x, (ComplexNumbers) y);
-                case "-":
-                    return sub((ComplexNumbers) x, (ComplexNumbers) y);
-                case "*":
-                    return mul((ComplexNumbers) x, (ComplexNumbers) y);
-                case "/":
-                    return div((ComplexNumbers) x, (ComplexNumbers) y);
-                default:
-                    return new ComplexNumbers(0, 0);
-            }
+            return switch (op) {
+                case "+" -> add((ComplexNumbers) x, (ComplexNumbers) y);
+                case "-" -> sub((ComplexNumbers) x, (ComplexNumbers) y);
+                case "*" -> mul((ComplexNumbers) x, (ComplexNumbers) y);
+                case "/" -> div((ComplexNumbers) x, (ComplexNumbers) y);
+                default -> new ComplexNumbers(0, 0);
+            };
         }
     }
 

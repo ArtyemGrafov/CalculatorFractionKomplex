@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b098d09-e4f1-4adc-b949-7b5b9b28c40a" name="Changes" comment="Не обработаны исключения&#10;Нет логгера">
+    <list default="true" id="1b098d09-e4f1-4adc-b949-7b5b9b28c40a" name="Changes" comment="Не обработаны исключения">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MyLogFile.log" beforeDir="false" afterPath="$PROJECT_DIR$/MyLogFile.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CalcModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalcModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ComplexNumbers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ComplexNumbers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +108,21 @@
       <option name="project" value="LOCAL" />
       <updated>1674155067000</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Не обработаны исключения&#10;Нет логгера">
+      <created>1674155939550</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1674155939550</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Не обработаны исключения&#10;Нет логгера">
+      <created>1674155974978</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1674155974978</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +140,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Не обработаны исключения&#10;Не реализованы комплексные числа&#10;Не реализован метод div RationalNumbersM" />
     <MESSAGE value="Не обработаны исключения&#10;Нет логгера" />
-    <option name="LAST_COMMIT_MESSAGE" value="Не обработаны исключения&#10;Нет логгера" />
+    <MESSAGE value="Не обработаны исключения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Не обработаны исключения" />
   </component>
 </project>
